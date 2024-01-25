@@ -5,19 +5,19 @@ document.addEventListener('DOMContentLoaded', function() {
   colorList.style.overflowY = 'auto';
 
   const categories = {
-      "Ryman Brand": [
-          {"name": "Dark Blue", "hex": "#0C4487"},
-          {"name": "Orange", "hex": "#F46419"},
-          {"name": "Teal", "hex": "#00B6A8"},
-          {"name": "Red", "hex": "#D71920"},
-      ],
-      "Characteristics": [
+    "Characteristics": [
         {"name": "Kindness & care", "hex": "#E43D8F"},
         {"name": "Strong teams", "hex": "#F37223"},
         {"name": "Resilience & composure", "hex": "#F7B718"},
         {"name": "Strive for excellence", "hex": "#72BF44"},
         {"name": "Communication", "hex": "#00B8D9"},
         {"name": "Lead & empower", "hex": "#005BAA"},
+      ],
+      "Ryman L&D Brand": [
+          {"name": "Dark Blue", "hex": "#0C4487"},
+          {"name": "Orange", "hex": "#F46419"},
+          {"name": "Teal", "hex": "#00B6A8"},
+          {"name": "Red", "hex": "#D71920"},
       ],
       "Academy Primary": [
           {"name": "Purple", "hex": "#472C7B"},
