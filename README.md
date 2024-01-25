@@ -7,7 +7,7 @@ To download and install the Ryman Hex Codes Chrome extension, follow these simpl
 
 1. **Download the Repository:**
    - Click on the "Code" button above and select "Download ZIP" from the dropdown menu.
-   - Unzip the downloaded ZIP file to a location of your choice on your computer. Make sure it is somewhere you can find it!
+   - Unzip the downloaded ZIP file to a location of your choice on your computer. Make sure it is somewhere you can find it! IMPORTANT: If you delete this folder, the extension will no longer work. Save the folder somewhere that you can KEEP it.
 
 2. **Install the Extension:**
    - Open Google Chrome and browse to `chrome://extensions/`.
