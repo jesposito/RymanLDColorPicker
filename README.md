@@ -17,7 +17,7 @@ To download and install the Ryman Hex Codes Chrome extension, follow these simpl
 3. **Use the Extension:**
    - Once installed, you can click on the extension icon in the Chrome toolbar to view the color hex codes. Look for the puzzle icon in the top right corner of Chrome. Once you find the "Ryman Hex Codes" extension, you can pin it to make it easier to access. 
    - To use, simply click the extension, then click the "Copy" button next to a color to copy its hex code to the clipboard.
-
+ 
 ## Updating the Extension
 
 1. Before installing a new version of the extension, it's recommended to remove the existing version from Chrome.
