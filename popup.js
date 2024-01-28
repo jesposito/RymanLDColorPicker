@@ -13,11 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
         {"name": "Communication", "hex": "#00B8D9"},
         {"name": "Lead & empower", "hex": "#005BAA"},
       ],
-      "Ryman L&D Brand": [
-          {"name": "Dark Blue", "hex": "#0C4487"},
+      "Ryman Brand": [
+          {"name": "Dark Blue", "hex": "#114C8F"},
           {"name": "Orange", "hex": "#F46419"},
           {"name": "Teal", "hex": "#00B6A8"},
           {"name": "Red", "hex": "#D71920"},
+          {"name": "Purple", "hex": "#472C7B"},
+          {"name": "Pink", "hex": "#ED1865"},
       ],
       "Academy Primary": [
           {"name": "Purple", "hex": "#472C7B"},
