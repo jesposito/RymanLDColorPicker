@@ -26,6 +26,3 @@ To download and install the Ryman Hex Codes Chrome extension, follow these simpl
 
 ## Contribution
 If you need to make changes to the extension, please reach out to Jed for assistance.
-
-## License
-This project is not public but uses Git for version control and collaboration within the team.
