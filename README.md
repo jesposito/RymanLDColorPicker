@@ -31,6 +31,6 @@ The extension dynamically fetches color data from Smartsheet, eliminating the ne
 
 ## Contribution and Support
 
-This extension is managed and maintained by the Ryman design and development team. For feature requests, support, or contributions, please reach out to the project maintainers. Your feedback and contributions are highly valued as we strive to improve this tool for all Ryman employees.
+This extension is managed and maintained by Ryman Healthcare. For feature requests, support, or contributions, please reach out to the project maintainers. Your feedback and contributions are highly valued as we strive to improve this tool for all Ryman employees.
 
 For technical support or to contribute to the project, please contact Jed Esposito, Matt Aldridge, or the designated project maintainer.
