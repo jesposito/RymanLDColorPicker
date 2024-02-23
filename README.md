@@ -1,4 +1,4 @@
-# Ryman Hex Codes
+# Ryman Color Picker
 
 This project is a Chrome extension that displays a list of color hex codes for the Ryman brand and related categories. It allows users to copy the hex codes to their clipboard. 
 
