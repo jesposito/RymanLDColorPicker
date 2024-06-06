@@ -1,86 +1,115 @@
-//popup.js
 document.addEventListener('DOMContentLoaded', function() {
-    const colorList = document.getElementById('colorList');
+    // Add event listener to refresh button
+    document.querySelector('.refresh-button').addEventListener('click', () => {
+        loadData();
+    });
 
-    chrome.storage.local.get(['smartsheetSheetId', 'smartsheetAccessToken'], function(config) {
-        if (config.smartsheetSheetId && config.smartsheetAccessToken) {
-            fetchCategoriesFromSmartsheet(config.smartsheetSheetId, config.smartsheetAccessToken);
-        } else {
-            console.error('Smartsheet configuration is missing.');
+    // Initial load
+    loadData();
+});
+
+async function fetchSharePointData() {
+    const siteUrl = 'https://ryman.sharepoint.com/sites/LearningAndDevelopment';
+    const listName = 'colorPicker';
+
+    const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/items`, {
+        headers: {
+            'Accept': 'application/json;odata=verbose'
         }
     });
 
-    async function fetchCategoriesFromSmartsheet(sheetId, accessToken) {
-        const url = `https://api.smartsheet.com/2.0/sheets/${sheetId}`;
-        const headers = {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-        };
-
-        try {
-            const response = await fetch(url, { method: 'GET', headers: headers });
-            const data = await response.json();
-            const categories = processSmartsheetData(data);
-            updateUI(categories);
-        } catch (error) {
-            console.error('Failed to fetch data from Smartsheet', error);
-        }
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
     }
 
-    function processSmartsheetData(data) {
-        let categories = {};
-        data.rows.forEach(row => {
-            const category = row.cells[0].value;
-            const name = row.cells[1].value;
-            const hex = row.cells[2].value;
+    const data = await response.json();
+    return data.d.results;
+}
 
-            if (!categories[category]) {
-                categories[category] = [];
-            }
+function displayData(data) {
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = ''; // Clear existing content
+    const categories = {};
 
-            categories[category].push({name, hex});
+    // Group items by category
+    data.forEach(item => {
+        if (!categories[item.Category]) {
+            categories[item.Category] = [];
+        }
+        categories[item.Category].push(item);
+    });
+
+    // Create elements for each category and its colors
+    let firstCategory = true;
+    for (const [category, items] of Object.entries(categories)) {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'category-div';
+
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.className = 'category-title';
+        categoryTitle.textContent = category;
+
+        if (firstCategory) {
+            categoryTitle.setAttribute('aria-expanded', 'true');
+        } else {
+            categoryTitle.setAttribute('aria-expanded', 'false');
+        }
+
+        categoryTitle.addEventListener('click', () => {
+            const expanded = categoryTitle.getAttribute('aria-expanded') === 'true';
+            categoryTitle.setAttribute('aria-expanded', !expanded);
+            const colorDivs = categoryDiv.querySelectorAll('.color-div');
+            colorDivs.forEach(div => {
+                div.style.display = expanded ? 'none' : 'flex';
+            });
+        });
+        categoryDiv.appendChild(categoryTitle);
+
+        items.forEach(item => {
+            const colorDiv = document.createElement('div');
+            colorDiv.className = 'color-div';
+            colorDiv.style.display = firstCategory ? 'flex' : 'none';
+
+            const colorSwatch = document.createElement('div');
+            colorSwatch.className = 'color-swatch';
+            colorSwatch.style.backgroundColor = item.Color;
+
+            const colorName = document.createElement('span');
+            colorName.className = 'color-name';
+            colorName.textContent = `${item.Value}: ${item.Color}`;
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            copyButton.addEventListener('click', () => {
+                navigator.clipboard.writeText(item.Color).then(() => {
+                    copyButton.textContent = 'Copied';
+                    copyButton.classList.add('copied');
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy';
+                        copyButton.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+            });
+
+            colorDiv.appendChild(colorSwatch);
+            colorDiv.appendChild(colorName);
+            colorDiv.appendChild(copyButton);
+
+            categoryDiv.appendChild(colorDiv);
         });
 
-        return categories;
+        contentDiv.appendChild(categoryDiv);
+        firstCategory = false; // Set to false after the first category
     }
+}
 
-    function updateUI(categories) {
-        for (let category in categories) {
-            const categoryHeader = document.createElement('h2');
-            categoryHeader.textContent = category;
-            colorList.appendChild(categoryHeader);
-
-            categories[category].forEach(color => {
-                const colorDiv = document.createElement('div');
-                colorDiv.className = 'color-div';
-
-                const swatch = document.createElement('div');
-                swatch.className = 'color-swatch';
-                swatch.style.backgroundColor = color.hex;
-
-                const button = document.createElement('button');
-                button.textContent = 'Copy';
-                button.className = 'copy-button';
-                button.addEventListener('click', function() {
-                    navigator.clipboard.writeText(color.hex)
-                        .then(() => {
-                            button.textContent = 'Copied!';
-                            setTimeout(() => { button.textContent = 'Copy'; }, 1500);
-                        })
-                        .catch(err => {
-                            console.error('Failed to copy hex code', err);
-                        });
-                });
-
-                const colorName = document.createElement('span');
-                colorName.textContent = `${color.name}: ${color.hex}`;
-                colorName.className = 'color-name';
-
-                colorDiv.appendChild(colorName);
-                colorDiv.appendChild(swatch);
-                colorDiv.appendChild(button);
-                colorList.appendChild(colorDiv);
-            });
-        }
-    }
-});
+function loadData() {
+    fetchSharePointData().then(data => {
+        displayData(data);
+    }).catch(error => {
+        console.error("Error fetching SharePoint data:", error);
+    });
+}

@@ -1,7 +1,54 @@
+body {
+    width: 350px; /* Increased width */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.refresh-button {
+    cursor: pointer;
+}
+
+h2 {
+    margin: 0;
+}
+
+#content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.category-div {
+    margin-bottom: 20px;
+}
+
+.category-title {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc; /* Subtle divider */
+    padding-bottom: 5px; /* Spacing for divider */
+}
+
+.category-title::after {
+    content: '\1F896'; /* Down arrow for collapsed state */
+}
+
+.category-title[aria-expanded="true"]::after {
+    content: '\1F897'; /* Up arrow for expanded state */
+}
+
 .color-div {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .color-swatch {
@@ -13,6 +60,11 @@
 .copy-button {
     margin-left: 10px;
     cursor: pointer;
+}
+
+.copy-button.copied {
+    background-color: #d4edda;
+    color: #155724;
 }
 
 .color-name {
