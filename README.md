@@ -4,8 +4,10 @@ This project is a Chrome extension designed to dynamically display a list of Rym
 
 ## Features
 
-- Dynamically fetches the latest color hex codes from Smartsheet, ensuring users always have access to the most up-to-date branding colors.
-- Allows users to copy hex codes directly to their clipboard with one click.
+- Dynamically fetches the latest color hex codes from SharePoint, ensuring users always have access to the most up-to-date branding colors.
+- Collapsible categories for better organization and ease of use, with the first category expanded by default.
+- Subtle dividers under each category for improved readability.
+- Allows users to copy hex codes directly to their clipboard with one click, with a visual confirmation indicating the hex code has been copied.
 
 ## Installation
 
@@ -27,7 +29,7 @@ The extension is intended to be deployed organization-wide, making it available 
 
 ## Automatic Updates
 
-The extension dynamically fetches color data from Smartsheet, eliminating the need for manual updates to the extension for color changes. Any updates to the extension's functionality will be communicated and deployed through Chrome Enterprise for organizational users. Personal or test installations should follow the standard update procedure as described.
+The extension dynamically fetches color data from SharePoint, eliminating the need for manual updates to the extension for color changes. Any updates to the extension's functionality will be communicated and deployed through Chrome Enterprise for organizational users. Personal or test installations should follow the standard update procedure as described.
 
 ## Contribution and Support
 
